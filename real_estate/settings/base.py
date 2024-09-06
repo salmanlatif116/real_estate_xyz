@@ -33,7 +33,8 @@ THIRD_PARTY_APPS = [
     'django_countries',
     'phonenumber_field',
     'djoser',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    
 
 ]
 
@@ -136,17 +137,27 @@ REST_FRAMEWORK = {
 
 from datetime import timedelta
 
+# SIMPLE_JWT = {
+#     "AUTH_HEADER_TYPES": (
+#         "Bearer",
+#         "JWT",
+#     ),
+#     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+#     "REFRESH_TOKEN_LIFWTIME": timedelta(days=2),
+#     "SIGNING_KEY": env("SIGNING_KEY"),
+#     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+#     "AUTH_TOKEN_CLASSES": ("rest_framewrok_simplejwt.tokens.AccessToken",),
+# }
+
 SIMPLE_JWT = {
-    "AUTH_HEADER_TYPES": (
-        "Bearer",
-        "JWT",
-    ),
+    "AUTH_HEADER_TYPES": ("Bearer",),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
-    "REFRESH_TOKEN_LIFWTIME": timedelta(days=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
     "SIGNING_KEY": env("SIGNING_KEY"),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
-    "AUTH_TOKEN_CLASSES": ("rest_framewrok_simplejwt.tokens.AccessToken",),
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",), 
 }
+
 
 DJOSER = {
     "LOGIN_FIELD" : "email",

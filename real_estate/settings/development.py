@@ -16,12 +16,9 @@ DATABASES = {
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = env('EMAIL_HOST')
-EMAIL_USE_TLS = True
-EMAIL_PORT = env('EMAIL_PORT')
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
-DOMAIN = env('DOMAIN')
-SITE = env('SITE')
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '5ee6103eeabb7e'
+EMAIL_HOST_PASSWORD = 'f7e5ce42460a6b'
+EMAIL_PORT = '2525'
+
 
