@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer,UserDeleteSerializer
+from djoser.serializers import UserCreateSerializer as BaseSerializer
 from django_countries.serializer_fields import CountryField
 from phonenumber_field.serializerfields import PhoneNumberField
 
@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id',
             'username',
             'email',
-            'firts_name',
+            'first_name',
             'last_name',
             'full_name',
             'profile_photo',
@@ -52,7 +52,8 @@ class UserSerializer(serializers.ModelSerializer):
     
 
 
-class CreateUserSerializer(UserCreateSerializer):
-    class Meta(UserCreateSerializer.Meta):
+class CreateUserSerializer(BaseSerializer):
+    class Meta(BaseSerializer.Meta):
         model = User
-        fields = ['id','username','email','first_name','last_name','password',]
+        fields = ['id','username','email','first_name','last_name','password','re_password']
+
