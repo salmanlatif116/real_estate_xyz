@@ -7,7 +7,6 @@ class PropertyAdmin(admin.ModelAdmin):
     list_filter = ["advert_type", "property_type", "country"]
 
 
-
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(PropertyViews)
 

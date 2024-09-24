@@ -96,12 +96,11 @@ class Property(TimeStampedUUIDModel):
         choices=AdvertType.choices,
         default=AdvertType.FOR_SALE,
     )
-
     property_type = models.CharField(
         verbose_name=_("Property Type"),
         max_length=50,
-        # null=False,
-        # blank=False,
+        null=False,
+        blank=False,
         choices=PropertyType.choices,
         default=PropertyType.OTHER,
     )
