@@ -14,7 +14,7 @@ DATABASES = {
 }
 
 
-
+DEFAULT_FROM_EMAIL = "info@real-estate.com"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = '5ee6103eeabb7e'

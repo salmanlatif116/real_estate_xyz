@@ -1,21 +1,19 @@
-from django_countries.fields import CountryField
+from django_countries.serializer_fields import CountryField
 from django_countries.serializers import CountryFieldMixin
 from rest_framework import serializers
 
 from .models import Property, PropertyViews
 
 
-
 class PropertySerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
-    country = CountryField(name_only = True)
+    country = CountryField(name_only=True)
     cover_photo = serializers.SerializerMethodField()
     profile_photo = serializers.SerializerMethodField()
     photo1 = serializers.SerializerMethodField()
     photo2 = serializers.SerializerMethodField()
     photo3 = serializers.SerializerMethodField()
     photo4 = serializers.SerializerMethodField()
-
 
     class Meta:
         model = Property
@@ -38,7 +36,7 @@ class PropertySerializer(serializers.ModelSerializer):
             "plot_area",
             "total_floors",
             "bedrooms",
-            "bath_rooms",
+            "bathrooms",
             "advert_type",
             "property_type",
             "cover_photo",
@@ -47,8 +45,7 @@ class PropertySerializer(serializers.ModelSerializer):
             "photo3",
             "photo4",
             "published_status",
-            "views"
-            
+            "views",
         ]
 
     def get_user(self, obj):

@@ -1,36 +1,43 @@
 FROM python:3.10.0-slim-buster
 
+# Set environment variables
 ENV APP_HOME=/app
-RUN mkdir $APP_HOME
-RUN mkdir $APP_HOME/staticfiles
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
+# Create app directories
+RUN mkdir -p $APP_HOME/staticfiles
+
+# Set working directory
 WORKDIR $APP_HOME
 
-LABEL maintainer = 'salu33956@gmail.com'
+# Label for maintainer
+LABEL maintainer="salu33956@gmail.com"
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
+# Install dependencies
 RUN apt-get update \
-&& apt-get install -y build-essentials \
-&& apt-get install -y libpq-dev \
-&& apt-get install -y gettext \
-&& apt-get install netcat gcc postgresql \
-&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-&& rm rf /var/lib/apt/lists/*
+  && apt-get install -y build-essential libpq-dev gettext \
+  && apt-get install -y netcat gcc postgresql \
+  && apt-get purge -y --auto-remove \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --upgarde pip
+# Upgrade pip
+RUN pip3 install --no-cache-dir --upgrade pip
 
+# Install Python dependencies
 COPY ./requirements.txt /app/requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
+# Copy entrypoint and start scripts
 COPY ./docker/local/django/entrypoint /entrypoint
-RUN sed -i 's/\r$//g' /entrypoint
-RUN chmod +x /entrypoint
-
 COPY ./docker/local/django/start /start
-RUN sed -i 's/\r$//g' /start
-RUN chmod +x /start
 
-ENTRYPOINT [ '/entrypoint']
+# Fix line endings and permissions
+RUN sed -i 's/\r$//g' /entrypoint /start
+RUN chmod +x /entrypoint /start
 
+# Use entrypoint script to initialize the container
+ENTRYPOINT ["/entrypoint"]
+
+# Default command to run Django's development server
+CMD ["/start"]
